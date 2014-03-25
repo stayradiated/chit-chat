@@ -1,14 +1,14 @@
 .messages {
 
-  @include order(2);
-  @include flex(1);
+  order: 2;
+  flex: 1;
 
-  @include flexbox();
-  @include flex-direction(column);
+  display: flex;
+  flex-direction: column;
 
   .log {
     overflow: auto;
-    @include flex(1);
+    flex: 1;
   }
 
   .input {
@@ -24,8 +24,8 @@
 
   .message {
 
-    @include flexbox();
-    @include flex-direction(row);
+    display: flex;
+    flex-direction: row;
 
     line-height: 32px;
     padding: 0 10px;
@@ -42,7 +42,7 @@
     }
 
     .contents {
-      @include flex(1);
+      flex: 1;
     }
 
     .time {

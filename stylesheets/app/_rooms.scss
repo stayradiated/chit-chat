@@ -14,10 +14,10 @@
     line-height: 35px;
     padding: 0 10px;
 
-    @include flexbox();
+    display: flex;
 
     .name {
-      @include flex(1);
+      flex: 1;
     }
 
     .count {

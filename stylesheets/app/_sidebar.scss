@@ -1,13 +1,13 @@
 .sidebar {
 
-  @include order(1);
+  order: 1;
   width: 220px;
 
   background: $clouds;
   border-right: 1px solid $silver;
 
-  @include flexbox();
-  @include flex-direction(column);
+  display: flex;
+  flex-direction: column;
 
   h2 {
     margin: 10px 0 0 0;

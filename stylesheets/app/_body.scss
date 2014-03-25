@@ -7,15 +7,15 @@ body {
 
   cursor: default;
 
-  @include flexbox();
-  @include flex-direction (column);
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
-  @include flex(1);
-  @include order(2);
+  flex: 1;
+  order: 2;
 
-  @include flexbox();
-  @include flex-direction(row);
+  display: flex;
+  flex-direction: row;
   align-items: stretch;
 }
