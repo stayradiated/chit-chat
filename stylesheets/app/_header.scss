@@ -35,15 +35,18 @@ header {
 
   .username {
 
+    @include placeholder {
+      color: $HOVER_FG;
+    }
 
     @include order(2);
-    width: 200px;
 
+    width: 200px;
     height: $HEIGHT - 20px;
+    padding: 10px;
     border: none;
     outline: none;
     background: none;
-    padding: 10px;
 
     &:focus {
       background: $HOVER_BG;
