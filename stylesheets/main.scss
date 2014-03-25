@@ -1,4 +1,9 @@
+
+@import "modules/vars";
+@import "modules/type";
+
 @import "app/header";
 @import "app/sidebar";
 @import "app/rooms";
 @import "app/users";
+@import "app/main";
