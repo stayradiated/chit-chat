@@ -1,6 +1,6 @@
 'use strict';
 
-var App = new Backbone.Marionette.Application();
+var App = new Marionette.Application();
 
 App.addRegions({
   rooms:'.rooms',

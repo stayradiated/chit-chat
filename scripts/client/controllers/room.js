@@ -4,7 +4,7 @@ var App = require('./app');
 var RoomCollection = require('../models/room');
 var RoomCollectionView = require('../views/room');
 
-var Router = Backbone.Marionette.AppRouter.extend({
+var Router = Marionette.AppRouter.extend({
 
   appRoutes: {
     '*room': 'openRoom'

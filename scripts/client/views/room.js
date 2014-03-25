@@ -1,13 +1,13 @@
 'use strict';
 
-var RoomItemView = Backbone.Marionette.ItemView.extend({
+var RoomItemView = Marionette.ItemView.extend({
 
   tagName: 'li',
   template: '#template-room'
 
 });
 
-var RoomCollectionView = Backbone.Marionette.CompositeView.extend({
+var RoomCollectionView = Marionette.CompositeView.extend({
 
   template: '#template-room-container',
   itemView: RoomItemView,
