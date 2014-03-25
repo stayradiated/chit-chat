@@ -1,5 +1,16 @@
-.rooms {
+.sidebar .rooms {
 
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 
+  li {
+    list-style-type: none;
+  }
 
+  button {
+    @extend ._button-primary;
+  }
+ 
 }

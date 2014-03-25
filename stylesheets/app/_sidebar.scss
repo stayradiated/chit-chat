@@ -6,8 +6,22 @@
   top: $header_height;
   width: $sidebar_width;
 
+  background: $clouds;
+  border-right: 1px solid $silver;
+
+  & > div {
+    padding: 10px;
+    height: 50%;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $silver;
+    }
+  }
+
   h2 {
+    margin: 0;
     font-size: 20px;
+    line-height: 30px;
   }
 
 }

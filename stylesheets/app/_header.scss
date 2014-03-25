@@ -4,11 +4,14 @@ header {
   top: 0;
   height: $header_height;
   width: 100%;
+  background: $midnight_blue;
+  color: $clouds;
 
   .logo {
     float: left;
-    margin: 0;
+    margin: 0 0 0 10px;
     padding: 0;
+    line-height: $header_height;
   }
 
   .user {
