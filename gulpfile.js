@@ -1,10 +1,15 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var browserify = require('gulp-browserify');
+var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var connect = require('gulp-connect');
+var sequence = require('run-sequence');
+var autoprefix = require('gulp-autoprefixer');
+var browserify = require('gulp-browserify');
 
-gulp.task('default', ['sass', 'scripts']);
+gulp.task('default', function (cb) {
+  return sequence(['sass', 'libs', 'scripts'], 'minify', cb);
+});
 
 gulp.task('watch', function () {
   gulp.watch('stylesheets/**/*.scss', ['sass']);
@@ -18,34 +23,33 @@ gulp.task('connect', ['watch'], connect.server({
 }));
 
 gulp.task('sass', function () {
-
-  var _sass = sass();
-  _sass.on('error', console.log.bind(console));
-
-  gulp.src('stylesheets/main.scss')
-    .pipe(_sass)
+  return gulp.src('stylesheets/main.scss')
+    .pipe(sass({ outputStyle: 'compressed', errLogToConsole: true }))
+    .pipe(autoprefix())
     .pipe(gulp.dest('dist/css'))
     .pipe(connect.reload());
 });
 
 gulp.task('scripts', function () {
-
-  var _browserify = browserify({
-    standalone: 'App',
-  });
-  _browserify.on('error', console.log.bind(console));
-
-  gulp.src('scripts/client/controllers/app.js')
-    .pipe(_browserify)
+  return gulp.src('scripts/client/controllers/app.js')
+    .pipe(browserify({ standalone: 'App' }))
     .pipe(gulp.dest('dist/js'))
     .pipe(connect.reload());
+});
 
+gulp.task('libs', function () {
+  return gulp.src([
+    'bower_components/jquery/dist/jquery.js',
+    'bower_components/underscore/underscore.js',
+    'bower_components/backbone/backbone.js',
+    'bower_components/backbone.marionette/lib/backbone.marionette.js',
+    'bower_components/sockjs/sockjs.js'
+  ]).pipe(concat('libs.js'))
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('minify', function () {
-
-  gulp.src('dist/js/*.js')
+  return gulp.src('dist/js/*.js')
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
-
 });
