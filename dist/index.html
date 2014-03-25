@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <title>Chit Chat</title>
   <link rel="stylesheet" href="css/main.css">
+
   <!-- <script src="js/lib.js"></script> -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
   <script src="bower_components/backbone/backbone.js"></script>
   <script src="bower_components/backbone.marionette/lib/backbone.marionette.js"></script>
+
+  <script src="js/app.js"></script>
 </head>
 <body>
 
@@ -21,56 +24,41 @@
   <main class="main">
 
     <div class="messages">
-      <div class="log">
-        <div class="message">
-          <span class="user">George</span>
-          <span class="contents">Magnam vero facere dolor nihil maiores quod deleniti.</span>
-          <span class="time">12:00</span>
-        </div>
-        <div class="message">
-          <span class="user">Jono</span>
-          <span class="contents">Adipisicing fugit autem a quis placeat sed ipsam illum tempora.</span>
-          <span class="time">12:01</span>
-        </div>
-        <div class="message">
-          <span class="user">George</span>
-          <span class="contents">Consectetur amet excepturi adipisci earum commodi minus.</span>
-          <span class="time">12:02</span>
-        </div>
-      </div>
+      <div class="log"></div>
       <div class="input" contenteditable="true"></div>
     </div>
 
     <aside class="sidebar">
-      <div class="rooms">
-        <h2>Rooms</h2>
-        <ul>
-          <!-- rooms -->
-          <li>
-            <span class="name">Popular Room</span>
-            <span class="count">30</span>
-          </li>
-          <li>
-            <span class="name">Empty Room</span>
-            <span class="count">0</span>
-          </li>
-          <li class="active">
-            <span class="name">My Room</span>
-            <span class="count">2</span>
-          </li>
-        </ul>
-        <button type="button">New Room</button>
-      </div>
-      <div class="users">
-        <h2>Users</h2>
-        <ul>
-          <!-- users -->
-          <li>User</li>
-        </ul>
-      </div>
+      <div class="rooms"></div>
+      <div class="users"></div>
     </aside>
 
   </main>
-  
+
+  <script type="template" id="template-room-container">
+    <h2>Rooms</h2>
+    <ul><!-- rooms --></ul>
+    <button type="button">New Room</button>
+  </script>
+
+  <script type="template" id="template-users-container">
+    <h2>Users</h2>
+    <ul><!-- users --></ul>
+  </script>
+
+  <script type="template" id="template-message">
+    <span class="user"><%= user %></span>
+    <span class="contents"><%= name %></span>
+    <span class="time"><%= time %></span>
+  </script>
+
+  <script type="template" id="template-room">
+    <span class="name"><%= name %></span>
+    <span class="count"><%= users %></span>
+  </script>
+
+  <script type="template" id="template-user">
+    <%= name %>
+  </script>
 </body>
 </html>

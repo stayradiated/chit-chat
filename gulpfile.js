@@ -29,9 +29,23 @@ gulp.task('sass', function () {
 });
 
 gulp.task('scripts', function () {
-  gulp.src('scripts/client/index.js')
-    .pipe(browserify())
-    .pipe(uglify())
+
+  var _browserify = browserify({
+    standalone: 'App',
+  });
+  _browserify.on('error', console.log.bind(console));
+
+  gulp.src('scripts/client/controllers/app.js')
+    .pipe(_browserify)
     .pipe(gulp.dest('dist/js'))
     .pipe(connect.reload());
+
+});
+
+gulp.task('minify', function () {
+
+  gulp.src('dist/js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
+
 });

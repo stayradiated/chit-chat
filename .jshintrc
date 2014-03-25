@@ -1,0 +1,9 @@
+{
+  "node": true,
+  "browser": true,
+  "globals": {
+    "$": true,
+    "_": true,
+    "Backbone": true
+  }
+}
