@@ -26,8 +26,6 @@
   "homepage": "https://github.com/stayradiated/chit-chat",
   "dependencies": {
     "jandal": "0.0.14",
-    "backbone": "^1.1.2",
-    "backbone.marionette": "^1.7.1",
     "express": "^3.5.0"
   },
   "devDependencies": {

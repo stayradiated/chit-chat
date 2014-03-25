@@ -1,0 +1,32 @@
+{
+  "name": "chit-chat",
+  "version": "0.0.1",
+  "homepage": "https://github.com/stayradiated/chit-chat",
+  "authors": [
+    "George Czabania <george@czabania.com>"
+  ],
+  "description": "Simple chat app",
+  "main": "dist/index.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "chat"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.0",
+    "underscore": "~1.6.0",
+    "backbone.marionette": "~1.7.1",
+    "sockjs": "~0.3.4"
+  }
+}
