@@ -3,7 +3,11 @@ var sass = require('gulp-sass');
 var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
 
-gulp.task('default', function () {
+gulp.task('default', ['sass', 'scripts']);
+
+gulp.task('watch', function () {
+  gulp.watch('./stylesheets/*/*.scss', ['sass']);
+  gulp.watch('./scripts/client/*/*js', ['scripts']);
 });
 
 gulp.task('sass', function () {
