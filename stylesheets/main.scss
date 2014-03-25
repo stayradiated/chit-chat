@@ -1,17 +1,19 @@
 
 // Vendor
 @import "vendor/normalize";
-@import "vendor/css3-mixins";
+@import "vendor/flex";
 
 // Modules
 @import "modules/colors";
 @import "modules/vars";
 @import "modules/type";
 @import "modules/buttons";
+@import "modules/misc";
 
 // App
+@import "app/body";
 @import "app/header";
 @import "app/sidebar";
 @import "app/rooms";
 @import "app/users";
-@import "app/main";
+@import "app/messages";

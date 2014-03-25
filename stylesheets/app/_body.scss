@@ -1,0 +1,21 @@
+body {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+
+  cursor: default;
+
+  @include flexbox();
+  @include flex-direction (column);
+}
+
+.main {
+  @include flex(1);
+  @include order(2);
+
+  @include flexbox();
+  @include flex-direction(row);
+  align-items: stretch;
+}

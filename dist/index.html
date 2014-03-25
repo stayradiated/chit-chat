@@ -9,54 +9,63 @@
 
   <header class="header">
     <h1 class="logo">Chit Chat</h1>
-    <div class="user">
-      <input type="text" placeholder="Username">
-    </div>
+    <input class="username" type="text" placeholder="Username">
+    <label class="label">Name:</label>
   </header>
 
   <main class="main">
-    <div class="messages">
-      <div class="message">
-        <span class="user">George</span>
-        <span class="contents">Magnam vero facere dolor nihil maiores quod deleniti.</span>
-        <span class="time">12:00</span>
-      </div>
-      <div class="message">
-        <span class="user">Jono</span>
-        <span class="contents">Adipisicing fugit autem a quis placeat sed ipsam illum tempora.</span>
-        <span class="time">12:01</span>
-      </div>
-      <div class="message">
-        <span class="user">George</span>
-        <span class="contents">Consectetur amet excepturi adipisci earum commodi minus.</span>
-        <span class="time">12:02</span>
-      </div>
-    </div>
-    <div class="input">
-      <input type="text">
-    </div>
-  </main>
 
-  <aside class="sidebar">
-    <div class="rooms">
-      <h2>Rooms</h2>
-      <ul>
-        <!-- rooms -->
-        <li>
-          <span class="name">Room</span>
-          <span class="count">30</span>
-        </li>
-      </ul>
-      <button type="button">New Room</button>
+    <div class="messages">
+      <div class="log">
+        <div class="message">
+          <span class="user">George</span>
+          <span class="contents">Magnam vero facere dolor nihil maiores quod deleniti.</span>
+          <span class="time">12:00</span>
+        </div>
+        <div class="message">
+          <span class="user">Jono</span>
+          <span class="contents">Adipisicing fugit autem a quis placeat sed ipsam illum tempora.</span>
+          <span class="time">12:01</span>
+        </div>
+        <div class="message">
+          <span class="user">George</span>
+          <span class="contents">Consectetur amet excepturi adipisci earum commodi minus.</span>
+          <span class="time">12:02</span>
+        </div>
+      </div>
+      <div class="input" contenteditable="true"></div>
     </div>
-    <div class="users">
-      <h2>Users</h2>
-      <ul>
-        <!-- users -->
-        <li>User</li>
-      </ul>
-    </div>
-  </aside>
+
+    <aside class="sidebar">
+      <div class="rooms">
+        <h2>Rooms</h2>
+        <ul>
+          <!-- rooms -->
+          <li>
+            <span class="name">Popular Room</span>
+            <span class="count">30</span>
+          </li>
+          <li>
+            <span class="name">Empty Room</span>
+            <span class="count">0</span>
+          </li>
+          <li class="active">
+            <span class="name">My Room</span>
+            <span class="count">2</span>
+          </li>
+        </ul>
+        <button type="button">New Room</button>
+      </div>
+      <div class="users">
+        <h2>Users</h2>
+        <ul>
+          <!-- users -->
+          <li>User</li>
+        </ul>
+      </div>
+    </aside>
+
+  </main>
   
 </body>
 </html>

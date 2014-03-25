@@ -1,0 +1,54 @@
+.messages {
+
+  @include order(2);
+  @include flex(1);
+
+  @include flexbox();
+  @include flex-direction(column);
+
+  .log {
+    overflow: auto;
+    @include flex(1);
+  }
+
+  .input {
+    border-top: 1px solid $silver;
+    height: 40px;
+    outline: none;
+    padding: 10px;
+
+    &:focus {
+      background: $white;
+    }
+  }
+
+  .message {
+
+    @include flexbox();
+    @include flex-direction(row);
+
+    line-height: 32px;
+    padding: 0 10px;
+
+    &:nth-child(2n) {
+      background: lighten($peter_river, 43);
+    }
+
+    .user {
+      width: 50px;
+      text-align: right;
+      padding-right: 10px;
+      font-weight: bold;
+    }
+
+    .contents {
+      @include flex(1);
+    }
+
+    .time {
+      color: $asbestos;
+    }
+
+  }
+
+}

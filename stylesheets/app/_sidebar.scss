@@ -1,27 +1,23 @@
 .sidebar {
 
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: $header_height;
-  width: $sidebar_width;
+  @include order(1);
+  width: 220px;
 
   background: $clouds;
   border-right: 1px solid $silver;
 
-  & > div {
-    padding: 10px;
-    height: 50%;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid $silver;
-    }
-  }
+  @include flexbox();
+  @include flex-direction(column);
 
   h2 {
-    margin: 0;
-    font-size: 20px;
-    line-height: 30px;
+    margin: 10px 0 0 0;
+    padding: 0 5px;
+
+    font-size: 12px;
+    line-height: 35px;
+    color: darken($asbestos, 10);
+    text-transform: uppercase;
+    border-bottom: 2px solid $silver;
   }
 
 }

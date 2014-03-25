@@ -1,22 +1,59 @@
 header {
 
-  position: absolute;
-  top: 0;
-  height: $header_height;
-  width: 100%;
-  background: $midnight_blue;
-  color: $clouds;
+  $HEIGHT: 40px;
+
+  $BG: $belizehole;
+  $FG: $white;
+
+  $HOVER_BG: lighten($BG, 7);
+  $HOVER_FG: lighten($BG, 30);
+
+  @include order(1);
+
+  height: $HEIGHT;
+  background: $BG;
+  color: $FG;
+
+  @include flexbox();
+  @include flex-direction(row);
 
   .logo {
-    float: left;
+    @include order(0);
+    @include flex(1);
     margin: 0 0 0 10px;
     padding: 0;
-    line-height: $header_height;
+    font-size: 20px;
+    line-height: $HEIGHT;
   }
 
-  .user {
-    float: right;
-    margin: 20px;
+  .label {
+    @include order(1);
+    line-height: $HEIGHT;
+    padding-left: 10px;
+    color: $HOVER_FG;
+  }
+
+  .username {
+
+
+    @include order(2);
+    width: 200px;
+
+    height: $HEIGHT - 20px;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 10px;
+
+    &:focus {
+      background: $HOVER_BG;
+    }
+
+    &:focus + .label {
+      background: $HOVER_BG;
+      color: $FG;
+    }
+
   }
 
 }
