@@ -1,0 +1,33 @@
+{
+  "name": "chit-chat",
+  "version": "0.0.1",
+  "description": "Simple chat app",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stayradiated/chit-chat.git"
+  },
+  "keywords": [
+    "chat",
+    "talk",
+    "room",
+    "message",
+    "communicate",
+    "app"
+  ],
+  "author": "George Czabania",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stayradiated/chit-chat/issues"
+  },
+  "homepage": "https://github.com/stayradiated/chit-chat",
+  "dependencies": {
+    "jandal": "0.0.14",
+    "backbone": "^1.1.2",
+    "backbone.marionette": "^1.7.1",
+    "express": "^3.5.0"
+  }
+}
