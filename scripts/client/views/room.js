@@ -1,18 +1,53 @@
 'use strict';
 
+var App = require('../app');
+
 var RoomItemView = Marionette.ItemView.extend({
 
   tagName: 'li',
-  template: '#template-room'
+  template: '#template-room',
+
+  events: {
+    'click': 'onclick'
+  },
+
+  onclick: function () {
+    this.trigger('select');
+    this.select();
+    App.trigger('select:room', this.model);
+  },
+
+  select: function () {
+    this.$el.addClass('active');
+  }
 
 });
 
-var RoomCollectionView = Marionette.CompositeView.extend({
+var RoomCompositeView = Marionette.CompositeView.extend({
 
+  className: 'rooms',
   template: '#template-room-container',
+
   itemView: RoomItemView,
-  itemViewContainer: 'ul'
+  itemViewContainer: 'ul',
+
+  events: {
+    'click button': 'createRoom'
+  },
+
+  initialize: function () {
+    this.listenTo(this, 'itemview:select', function (item) {
+      this.$('.active').removeClass('active');
+    });
+  },
+
+  createRoom: function () {
+    var name = prompt('Room name');
+    this.collection.add({
+      name: name
+    });
+  }
 
 });
 
-module.exports = RoomCollectionView;
+module.exports = RoomCompositeView;

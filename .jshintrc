@@ -5,6 +5,7 @@
     "$": true,
     "_": true,
     "Backbone": true,
-    "Marionette": true
+    "Marionette": true,
+    "moment": true
   }
 }

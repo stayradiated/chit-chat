@@ -1,6 +1,6 @@
 'use strict';
 
-var App = require('./app');
+var App = require('../app');
 var RoomCollection = require('../models/room');
 var RoomCollectionView = require('../views/room');
 
@@ -39,7 +39,7 @@ _.extend(Controller.prototype, {
     var rooms = new RoomCollectionView({
       collection: roomCollection
     });
-    App.rooms.show(rooms);
+    App.sidebarA.show(rooms);
   },
 
   openRoom: function (roomId) {
@@ -49,17 +49,9 @@ _.extend(Controller.prototype, {
 });
 
 App.addInitializer(function () {
-
-  console.log('starting room controller');
-
   var controller = new Controller();
-
-  var router = new Router({
-    controller: controller
-  });
-
+  var router = new Router({ controller: controller });
   controller.start();
-
 });
 
 module.exports = Router;

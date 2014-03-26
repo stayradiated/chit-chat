@@ -1,4 +1,4 @@
-header {
+.header {
 
   $HEIGHT: 40px;
 
@@ -8,10 +8,10 @@ header {
   $HOVER_BG: lighten($BG, 7);
   $HOVER_FG: lighten($BG, 30);
 
-  order: 1;
   height: $HEIGHT;
   background: $BG;
   color: $FG;
+  border-bottom: 4px solid darken($BG, 5);
 
   display: flex;
   flex-direction: row;

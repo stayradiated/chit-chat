@@ -1,8 +1,5 @@
 .messages {
 
-  order: 2;
-  flex: 1;
-
   display: flex;
   flex-direction: column;
 
@@ -16,10 +13,6 @@
     height: 40px;
     outline: none;
     padding: 10px;
-
-    &:focus {
-      background: $white;
-    }
   }
 
   .message {

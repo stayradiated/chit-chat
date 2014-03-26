@@ -1,3 +1,4 @@
+var log = require('log_');
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
@@ -31,8 +32,9 @@ gulp.task('sass', function () {
 });
 
 gulp.task('scripts', function () {
-  return gulp.src('scripts/client/controllers/app.js')
+  return gulp.src('scripts/client/app.js')
     .pipe(browserify({ standalone: 'App' }))
+    .on('error', log('browserify', 'blue'))
     .pipe(gulp.dest('dist/js'))
     .pipe(connect.reload());
 });
@@ -43,7 +45,8 @@ gulp.task('libs', function () {
     'bower_components/underscore/underscore.js',
     'bower_components/backbone/backbone.js',
     'bower_components/backbone.marionette/lib/backbone.marionette.js',
-    'bower_components/sockjs/sockjs.js'
+    'bower_components/sockjs/sockjs.js',
+    'bower_components/moment/moment.js'
   ]).pipe(concat('libs.js'))
     .pipe(gulp.dest('dist/js'));
 });

@@ -9,40 +9,46 @@
 </head>
 <body>
 
-  <header class="header">
-    <h1 class="logo">Chit Chat</h1>
-    <input class="username" type="text" placeholder="Username">
-    <label class="label">Name:</label>
+  <header class="header-container">
   </header>
 
   <main class="main">
 
-    <div class="messages">
-      <div class="log"></div>
-      <div class="input" contenteditable="true"></div>
+    <div class="content">
     </div>
 
     <aside class="sidebar">
-      <div class="rooms"></div>
-      <div class="users"></div>
+      <div class="sidebar-a"></div>
+      <div class="sidebar-b"></div>
     </aside>
 
   </main>
 
+  <script type="template" id="template-header">
+    <h1 class="logo">Chit Chat</h1>
+    <input class="username" value="<%= name %>" type="text" placeholder="Username">
+    <label class="label">Name:</label>
+  </script>
+
+  <script type="template" id="template-message-container">
+    <div class="log"></div>
+    <div class="input" contenteditable="true"></div>
+  </script>
+
   <script type="template" id="template-room-container">
     <h2>Rooms</h2>
-    <ul><!-- rooms --></ul>
+    <ul></ul>
     <button type="button">New Room</button>
   </script>
 
-  <script type="template" id="template-users-container">
+  <script type="template" id="template-user-container">
     <h2>Users</h2>
-    <ul><!-- users --></ul>
+    <ul></ul>
   </script>
 
   <script type="template" id="template-message">
-    <span class="user"><%= user %></span>
-    <span class="contents"><%= name %></span>
+    <span class="user"><%= user.get('name') %></span>
+    <span class="contents"><%= contents %></span>
     <span class="time"><%= time %></span>
   </script>
 
