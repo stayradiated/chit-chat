@@ -22,6 +22,10 @@ var MessageCollectionView = Marionette.CollectionView.extend({
     this.listenTo(this, 'after:item:added', this.scrollDown);
   },
 
+  onShow: function () {
+    this.scrollDown();
+  },
+
   scrollDown: function () {
     this.$el.scrollTop(this.el.scrollHeight);
   }
