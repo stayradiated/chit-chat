@@ -25,8 +25,11 @@
   },
   "homepage": "https://github.com/stayradiated/chit-chat",
   "dependencies": {
+    "backbone": "^1.1.2",
+    "express": "^3.5.0",
     "jandal": "0.0.14",
-    "express": "^3.5.0"
+    "sockjs": "^0.3.8",
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "gulp": "^3.5.6",
