@@ -8,23 +8,34 @@
   li {
     list-style-type: none;
     line-height: 35px;
-    padding: 0 10px;
+
+    * {
+      color: $belizehole;
+    }
 
     display: flex;
 
     .name {
       flex: 1;
+      text-decoration: none;
+    }
+
+    .delete {
+      width: 20px;
     }
 
     .count {
+      padding-left: 10px;
     }
 
-    &.active {
+    &.active * {
+      color: $wet_asphalt;
       font-weight: bold;
+      background: darken($clouds, 4);
     }
 
-    &:hover {
-      background: darken($clouds, 5);
+    &:hover * {
+      color: $wet_asphalt;;
     }
 
   }

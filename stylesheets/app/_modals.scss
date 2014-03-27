@@ -1,0 +1,33 @@
+.modal-container {
+
+  .modal {
+    background: $sun_flower;
+    border-bottom: 5px solid $orange;
+    padding: 10px;
+  }
+
+  p {
+    display: inline;
+  }
+
+  input {
+    background: $orange;
+    border: 0;
+    outline: 0;
+    padding: 4px;
+    line-height: 20px;
+
+    &::placeholder {
+      color: darken($orange, 20);
+    }
+  }
+
+  button {
+    @extend #button#primary;
+    background: $orange;
+    &:hover {
+      background: darken($orange, 10);
+    }
+  }
+
+}

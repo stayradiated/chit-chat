@@ -2,34 +2,25 @@
 
   width: 220px;
   background: $clouds;
-  border-right: 1px solid $silver;
+  padding: 0 10px;
+  overflow: auto;
 
-  display: flex;
-  flex-direction: column;
+  &.sidebar-left {
+    border-right: 1px solid $silver;
+  }
+
+  &.sidebar-right {
+    border-left: 1px solid $silver;
+  }
 
   h2 {
     margin: 10px 0 0 0;
-    padding: 0 5px;
 
-    font-size: 12px;
+    font-size: 13px;
     line-height: 35px;
     color: darken($asbestos, 10);
     text-transform: uppercase;
     border-bottom: 2px solid $silver;
-  }
-
-  .sidebar-a, .sidebar-b {
-    padding: 0 10px;
-    overflow: auto;
-  }
-
-  .sidebar-a {
-    order: 1;
-  }
-
-  .sidebar-b {
-    order: 2;
-    flex: 1;
   }
 
 }

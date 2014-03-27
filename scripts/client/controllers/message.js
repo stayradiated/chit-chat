@@ -3,23 +3,36 @@
 var App = require('../app');
 var MessageCollection = require('../models/message');
 var MessageCollectionView = require('../views/message');
+var MessageInputView = require('../views/messageInput');
 
-var Controller = function () {
-  this.messageCollection = new MessageCollection();
+var MessageController = function () {
+
 };
 
-_.extend(Controller.prototype, {
+_.extend(MessageController.prototype, {
 
   start: function () {
-    this.showMessages(this.messageCollection);
+
     // this.messageCollection.fetch();
+
+    App.vent.on('room:open', function (room) {
+      this.showMessages(room.get('messages'));
+    }, this);
+
+    this.showInput();
+
   },
 
   showMessages: function (messageCollection) {
     var messages = new MessageCollectionView({
       collection: messageCollection
     });
-    App.content.show(messages);
+    App.message.show(messages);
+  },
+
+  showInput: function () {
+    var input = new MessageInputView();
+    App.input.show(input);
   },
 
   openMessage: function (messageId) {
@@ -29,8 +42,8 @@ _.extend(Controller.prototype, {
 });
 
 App.addInitializer(function () {
-  var controller = new Controller();
-  controller.start();
+  var messageController = new MessageController();
+  messageController.start();
 });
 
-module.exports = Controller;
+module.exports = MessageController;

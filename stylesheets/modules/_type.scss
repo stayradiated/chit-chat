@@ -1,7 +1,22 @@
+@font-face {
+  font-family: 'Clear sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/webfonts/clearsans_400.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Clear sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(/webfonts/clearsans_700.woff) format('woff');
+}
+
 body {
-  font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  font-family: "Clear Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
 }
 
 label, p, li, div, input {
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 21px;
 }

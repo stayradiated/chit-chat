@@ -1,6 +1,8 @@
 'use strict';
 
-var User = Backbone.Model.extend({
+var App = require('../app');
+
+var User = Backbone.RelationalModel.extend({
 
   defaults: {
     name: ''
@@ -10,8 +12,17 @@ var User = Backbone.Model.extend({
 
 var Users = Backbone.Collection.extend({
 
-  model: User
+  model: User,
+
+  initialize: function () {
+    this.listenTo(this, 'add', function (model) {
+      if (this !== App.users) {
+        App.users.add(model);
+      }
+    });
+  }
 
 });
+
 
 module.exports = Users;

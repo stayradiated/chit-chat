@@ -12,26 +12,31 @@
   <header class="header-container">
   </header>
 
+  <div class="modal-container"></div>
+
   <main class="main">
 
     <div class="content">
+      <div class="message-container"></div>
+      <div class="input-container"></div>
     </div>
 
-    <aside class="sidebar">
-      <div class="sidebar-a"></div>
-      <div class="sidebar-b"></div>
+    <aside class="sidebar sidebar-left">
+    </aside>
+
+    <aside class="sidebar sidebar-right">
     </aside>
 
   </main>
 
+
   <script type="template" id="template-header">
     <h1 class="logo">Chit Chat</h1>
-    <input class="username" value="<%= name %>" type="text" placeholder="Username">
+    <input class="username" value="<%- name %>" type="text" placeholder="Username">
     <label class="label">Name:</label>
   </script>
 
-  <script type="template" id="template-message-container">
-    <div class="log"></div>
+  <script type="template" id="template-message-input">
     <div class="input" contenteditable="true"></div>
   </script>
 
@@ -47,18 +52,33 @@
   </script>
 
   <script type="template" id="template-message">
-    <span class="user"><%= user.get('name') %></span>
-    <span class="contents"><%= contents %></span>
-    <span class="time"><%= time %></span>
+    <span class="user"><%- user.name %></span>
+    <span class="contents"><%- contents %></span>
+    <span class="time"><%- time %></span>
   </script>
 
   <script type="template" id="template-room">
-    <span class="name"><%= name %></span>
-    <span class="count"><%= users %></span>
+    <span class="delete">X</span>
+    <a href="#<%- id %>" class="name"><%- name %></a>
+    <span class="count"><%- users.length %></span>
   </script>
 
   <script type="template" id="template-user">
-    <%= name %>
+    <%- name %>
   </script>
+
+  <script type="template" id="template-model-room-create">
+    <p>Enter a room name:</p>
+    <input type="text" placeholder="Name">
+    <button type="button" class="primary">Create</button>
+    <button type="button" class="cancel">Cancel</button>
+  </script>
+
+  <script type="template" id="template-model-room-destroy">
+    <p>Are you sure you want to destroy that room?</p>
+    <button type="button" class="cancel">Cancel</button>
+    <button type="button" class="primary">Destroy</button>
+  </script>
+
 </body>
 </html>

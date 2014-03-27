@@ -1,9 +1,23 @@
 .content {
-
   display: flex;
-
+  flex-direction: column;
 }
 
-.messages {
+.message-container {
+  display: flex;
   flex: 1;
+
+  .messages {
+    flex: 1;
+    overflow: auto;
+  }
+}
+
+.input-container {
+  .input {
+    border-top: 1px solid $silver;
+    height: 40px;
+    outline: none;
+    padding: 10px;
+  }
 }

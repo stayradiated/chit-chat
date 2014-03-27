@@ -5,7 +5,7 @@ var UserCollection = require('../models/user');
 var UserCollectionView = require('../views/user');
 
 var Controller = function () {
-  this.userCollection = new UserCollection();
+  this.userCollection = App.users;
 };
 
 _.extend(Controller.prototype, {
@@ -16,13 +16,7 @@ _.extend(Controller.prototype, {
     // this.userCollection.fetch();
 
     this.userCollection.add({
-      name: 'My user',
-      users: 20
-    });
-
-    this.userCollection.add({
-      name: 'My other user',
-      users: 42
+      name: 'Jono'
     });
 
   },
@@ -31,7 +25,7 @@ _.extend(Controller.prototype, {
     var users = new UserCollectionView({
       collection: userCollection
     });
-    App.sidebarB.show(users);
+    App.sidebarRight.show(users);
   },
 
   openUser: function (userId) {
@@ -40,8 +34,9 @@ _.extend(Controller.prototype, {
 
 });
 
+
 App.addInitializer(function () {
-  var controller = new Controller();
+var controller = new Controller();
   controller.start();
 });
 

@@ -13,50 +13,19 @@ var MessageItemView = Marionette.ItemView.extend({
 
 });
 
-var MessageCompositeView = Marionette.CompositeView.extend({
+var MessageCollectionView = Marionette.CollectionView.extend({
 
   className: 'messages',
-  template: '#template-message-container',
-
   itemView: MessageItemView,
-  itemViewContainer: '.log',
-
-  ui: {
-    log: '.log',
-    input: '.input'
-  },
-
-  events: {
-    'keydown .input': 'handleEnter'
-  },
 
   initialize: function () {
     this.listenTo(this, 'after:item:added', this.scrollDown);
   },
 
   scrollDown: function () {
-    var height = this.ui.log.height();
-    this.ui.log.scrollTop(height);
-  },
-
-  handleEnter: function (e) {
-    if (e.keyCode !== 13) return true;
-    this.postMessage();
-    return false;
-  },
-
-  postMessage: function () {
-    var message = this.ui.input.text().trim();
-    if (! message.length) return;
-
-    this.collection.add({
-      user: App.user,
-      contents: message
-    });
-
-    this.ui.input.empty();
+    this.$el.scrollTop(this.el.scrollHeight);
   }
 
 });
 
-module.exports = MessageCompositeView;
+module.exports = MessageCollectionView;

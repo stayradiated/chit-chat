@@ -3,7 +3,11 @@
 var UserItemView = Marionette.ItemView.extend({
 
   tagName: 'li',
-  template: '#template-user'
+  template: '#template-user',
+
+  initialize: function () {
+    this.listenTo(this.model, 'change', this.render);
+  }
 
 });
 

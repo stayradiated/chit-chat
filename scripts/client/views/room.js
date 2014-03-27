@@ -8,17 +8,22 @@ var RoomItemView = Marionette.ItemView.extend({
   template: '#template-room',
 
   events: {
-    'click': 'onclick'
+    'click .delete': 'delete'
   },
 
-  onclick: function () {
-    this.trigger('select');
-    this.select();
-    App.trigger('select:room', this.model);
+  initialize: function () {
+    this.listenTo(this.model.get('users'), 'add remove', this.render);
+    this.listenTo(this.model, 'select', this.select);
   },
 
   select: function () {
+    this.trigger('select');
     this.$el.addClass('active');
+    App.user.set('room', this.model);
+  },
+
+  delete: function () {
+    App.vent.trigger('modal:room:destroy', this.model);
   }
 
 });
@@ -42,10 +47,7 @@ var RoomCompositeView = Marionette.CompositeView.extend({
   },
 
   createRoom: function () {
-    var name = prompt('Room name');
-    this.collection.add({
-      name: name
-    });
+    App.vent.trigger('modal:room:create', this.collection);
   }
 
 });

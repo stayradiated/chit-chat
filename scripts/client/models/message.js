@@ -1,6 +1,14 @@
 'use strict';
 
-var Message = Backbone.Model.extend({
+var UserCollection = require('../models/user');
+
+var Message = Backbone.RelationalModel.extend({
+
+  relations: [{
+    type: Backbone.HasOne,
+    key: 'user',
+    relatedModel: UserCollection.prototype.model
+  }],
 
   defaults: {
     user: null,
@@ -10,7 +18,7 @@ var Message = Backbone.Model.extend({
 
   initialize: function () {
     if (this.get('time') === null) {
-      this.set('time', moment().format('MMM-D h:mm a'));
+      this.set('time', moment().format('h:mma, D MMM'));
     }
   }
 

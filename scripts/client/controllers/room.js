@@ -12,11 +12,11 @@ var Router = Marionette.AppRouter.extend({
 
 });
 
-var Controller = function () {
+var RoomController = function () {
   this.roomCollection = new RoomCollection();
 };
 
-_.extend(Controller.prototype, {
+_.extend(RoomController.prototype, {
 
   start: function () {
     this.showRooms(this.roomCollection);
@@ -24,34 +24,46 @@ _.extend(Controller.prototype, {
     // this.roomCollection.fetch();
 
     this.roomCollection.add({
-      name: 'My room',
-      users: 20
+      id: 10,
+      name: 'Lobby'
     });
 
-    this.roomCollection.add({
-      name: 'My other room',
-      users: 42
+    var lobby = this.roomCollection.at(0);
+
+    lobby.get('users').add({
+      name: 'Jimmy'
+    });
+
+    lobby.get('users').add({
+      name: 'Sammy'
     });
 
   },
 
   showRooms: function (roomCollection) {
-    var rooms = new RoomCollectionView({
+
+    var roomCollectionView = new RoomCollectionView({
       collection: roomCollection
     });
-    App.sidebarA.show(rooms);
+
+    App.sidebarLeft.show(roomCollectionView);
   },
 
   openRoom: function (roomId) {
-    App.vent.trigger('room:open', (roomId && roomId.trim()) || '');
+    var room = this.roomCollection.get(roomId && roomId.trim() || '');
+    if (! room) return;
+    room.trigger('select');
+    App.vent.trigger('room:open', room);
   }
 
 });
 
 App.addInitializer(function () {
-  var controller = new Controller();
-  var router = new Router({ controller: controller });
-  controller.start();
+  var roomController = new RoomController();
+  var router = new Router({
+    controller: roomController
+  });
+  roomController.start();
 });
 
-module.exports = Router;
+module.exports = RoomController;

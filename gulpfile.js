@@ -45,6 +45,7 @@ gulp.task('libs', function () {
     'bower_components/underscore/underscore.js',
     'bower_components/backbone/backbone.js',
     'bower_components/backbone.marionette/lib/backbone.marionette.js',
+    'bower_components/backbone-relational/backbone-relational.js',
     'bower_components/sockjs/sockjs.js',
     'bower_components/moment/moment.js'
   ]).pipe(concat('libs.js'))

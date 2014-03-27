@@ -15,19 +15,29 @@ body {
   order: 1;
 }
 
+.modal-container {
+  order: 2;
+}
+
 .main {
   flex: 1;
-  order: 2;
+  order: 3;
 
   display: flex;
   flex-direction: row;
 
-  .sidebar {
+  .sidebar-left {
     order: 1;
   }
 
   .content {
+    min-width: 300px;
     order: 2;
     flex: 1;
   }
+
+  .sidebar-right {
+    order: 3;
+  }
+
 }

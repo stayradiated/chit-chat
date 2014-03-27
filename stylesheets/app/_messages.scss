@@ -1,20 +1,5 @@
 .messages {
 
-  display: flex;
-  flex-direction: column;
-
-  .log {
-    overflow: auto;
-    flex: 1;
-  }
-
-  .input {
-    border-top: 1px solid $silver;
-    height: 40px;
-    outline: none;
-    padding: 10px;
-  }
-
   .message {
 
     display: flex;
@@ -24,11 +9,10 @@
     padding: 0 10px;
 
     &:nth-child(2n) {
-      background: lighten($peter_river, 43);
+      background: lighten($peter_river, 44);
     }
 
     .user {
-      width: 50px;
       text-align: right;
       padding-right: 10px;
       font-weight: bold;

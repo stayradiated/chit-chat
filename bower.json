@@ -29,5 +29,8 @@
     "backbone.marionette": "~1.7.1",
     "sockjs": "~0.3.4",
     "moment": "~2.5.1"
+  },
+  "devDependencies": {
+    "backbone-relational": "~0.8.7"
   }
 }
