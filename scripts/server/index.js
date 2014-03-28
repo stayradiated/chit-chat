@@ -5,6 +5,8 @@ var sockjs = require('sockjs');
 var express = require('express');
 var _ = require('underscore');
 
+var Socket = require('./socket');
+
 var app = express();
 
 app.configure(function () {
@@ -21,14 +23,3 @@ connection.on('connection', function (socket) {
   new Socket(jandal);
 });
 
-var Socket = function (socket) {
-  this.socket = socket;
-};
-
-_.extend(Socket.prototype, {
-
-
-
-});
-
-var rooms = [];
