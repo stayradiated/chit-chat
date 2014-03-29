@@ -26,8 +26,10 @@
   "homepage": "https://github.com/stayradiated/chit-chat",
   "dependencies": {
     "backbone": "^1.1.2",
+    "backbone-relational": "^0.8.6",
     "express": "^3.5.0",
     "jandal": "0.0.14",
+    "node-uuid": "^1.4.1",
     "sockjs": "^0.3.8",
     "underscore": "^1.6.0"
   },

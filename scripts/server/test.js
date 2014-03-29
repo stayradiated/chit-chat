@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var Jandal = require('jandal');
 var Socket = require('./socket.js');
 var _ = require('underscore');
-var Sandal = require('jandal/test/sandal');
+var Sandal = require('jandal-log');
 
 
 describe('Socket', function () {
@@ -35,8 +35,8 @@ describe('Socket', function () {
 
     it('should get the name', function (done) {
 
-      client.emit('user.getName', function (name) {
-        expect(name).to.equal('');
+      client.emit('user.fetch', function (user) {
+        expect(user.name).to.equal('');
         done();
       });
 
@@ -44,10 +44,12 @@ describe('Socket', function () {
 
     it('should set the name', function (done) {
 
-      client.emit('user.setName', 'John');
+      client.emit('user.update', {
+        name: 'John'
+      });
 
-      client.emit('user.getName', function (name) {
-        expect(name).to.equal('John');
+      client.emit('user.fetch', function (user) {
+        expect(user.name).to.equal('John');
         done();
       });
 
@@ -58,16 +60,27 @@ describe('Socket', function () {
 
       var otherClient = createClient();
 
-      client.emit('room.create', 'grape');
-      otherClient.emit('room.join', 'grape');
+      client.emit('room.create', { name: 'grape' }, function (room) {
 
-      otherClient.once('user.changeName', function (name) {
-        expect(name).to.equal('George');
-        client.emit('room.destroy', 'grape');
-        done();
+        client.emit('user.update', { room: room.id });
+        otherClient.emit('user.update', { room: room.id });
+
+        otherClient.once('user.update', function (user) {
+          expect(user.name).to.equal('George');
+          expect(user.room).to.equal(room.id);
+
+          client.emit('room.destroy', {
+            id: room.id
+          });
+          done();
+        });
+
       });
 
-      client.emit('user.setName', 'George');
+      client.emit('user.update', {
+        name: 'George'
+      });
+
     });
 
   });
@@ -85,13 +98,17 @@ describe('Socket', function () {
 
     it('should fetch rooms (not empty)', function (done) {
 
-      client.emit('room.create', 'pumpkin');
+      client.emit('room.create', {
+        name: 'pumpkin'
+      });
 
       client.emit('room.fetch', function (rooms) {
-        expect(rooms).to.eql([{
-          name: 'pumpkin',
-          users: 1
-        }]);
+        expect(rooms).to.have.length(1);
+        expect(rooms[0].name).to.equal('pumpkin');
+        expect(rooms[0].users).to.eql([]);
+        client.emit('room.destroy', {
+          name: 'pumpkin'
+        });
         done();
       });
 
@@ -100,19 +117,51 @@ describe('Socket', function () {
     it('should emit events when a room is created', function (done) {
 
       client.once('room.create', function (room) {
-        expect(room).to.eql({
-          name: 'orange',
-          users: 1
-        });
+        expect(room.name).to.equal('orange');
+        expect(room.users).to.eql([]);
+        client.emit('room.destroy', { id: room.id });
         done();
       });
 
-      client.emit('room.create', 'orange');
+      client.emit('room.create', {
+        name: 'orange'
+      });
 
     });
 
-    it('should broadcast when users join rooms');
-    it('should broadcast when users leave rooms');
+    it('should emit event when users join rooms', function (done) {
+
+      client.emit('room.create', { name: 'blueberry' }, function (room) {
+
+        client.once('room.update', function (room) {
+          expect(room.name).to.equal('blueberry');
+          expect(room.users).to.have.length(1);
+          done();
+        });
+
+        client.emit('room.join', room.id);
+
+      });
+
+    });
+
+    it('should emit event when users leave rooms', function (done) {
+
+      client.emit('room.create', 'raspberry');
+      client.emit('room.join', 'raspberry');
+
+      client.once('room.update', function (room) {
+        expect(room).to.eql({
+          name: 'raspberry',
+          users: 0
+        });
+        client.emit('room.destroy', 'raspberry');
+        done();
+      });
+
+      client.emit('room.leave', 'raspberry');
+
+    });
 
   });
 
