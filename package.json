@@ -42,6 +42,7 @@
     "gulp-connect": "^1.0.10",
     "gulp-sass": "^0.7.1",
     "gulp-uglify": "^0.2.1",
+    "random-words": "0.0.1",
     "run-sequence": "^0.3.6"
   }
 }
