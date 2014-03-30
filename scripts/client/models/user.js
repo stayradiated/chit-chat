@@ -12,6 +12,7 @@ var User = Backbone.RelationalModel.extend({
 
 var Users = Backbone.Collection.extend({
 
+  url: 'user',
   model: User,
 
   initialize: function () {

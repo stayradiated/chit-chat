@@ -24,7 +24,7 @@ describe('Socket', function () {
   });
 
   afterEach(function () {
-    client.emit('room.destroy', { id: room.id });
+    client.emit('room.delete', { id: room.id });
     _.each(allClients, function (client) {
       client.end();
     });
@@ -43,7 +43,7 @@ describe('Socket', function () {
 
     it('should get the name', function (done) {
 
-      client.emit('user.me', function (user) {
+      client.emit('user.create', function (user) {
         expect(user.name).to.equal('');
         done();
       });
@@ -56,7 +56,7 @@ describe('Socket', function () {
         name: 'John'
       });
 
-      client.emit('user.me', function (user) {
+      client.emit('user.create', function (user) {
         expect(user.name).to.equal('John');
         done();
       });
@@ -97,7 +97,7 @@ describe('Socket', function () {
 
       var otherClient = createClient();
 
-      otherClient.emit('user.me', function (otherUser) {
+      otherClient.emit('user.create', function (otherUser) {
 
         client.emit('user.read', { id: otherUser.id }, function (users) {
           expect(users).to.have.length(1);
@@ -192,13 +192,13 @@ describe('Socket', function () {
 
     });
 
-    it('should emit an event when a room is destroyed', function (done) {
+    it('should emit an event when a room is deleted', function (done) {
 
       client.emit('user.update', { room: room.id });
 
-      client.emit('room.destroy', { id: room.id });
+      client.emit('room.delete', { id: room.id });
 
-      client.emit('user.me', function (user) {
+      client.emit('user.create', function (user) {
         expect(user.room).to.equal(null);
         done();
       });
@@ -251,7 +251,7 @@ describe('Socket', function () {
       client.emit('message.create', { contents: 'hello' });
       client.emit('message.create', { contents: 'world' });
 
-      client.emit('message.read', { room: room.id }, function (messages) {
+      client.emit('message.read', function (messages) {
         expect(messages).to.have.length(2);
         expect(messages[0].contents).to.equal('hello');
         expect(messages[1].contents).to.equal('world');

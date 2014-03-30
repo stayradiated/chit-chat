@@ -19,23 +19,28 @@ var RoomController = function () {
 _.extend(RoomController.prototype, {
 
   start: function () {
+    var self = this;
     this.showRooms(this.roomCollection);
 
-    // this.roomCollection.fetch();
-
-    this.roomCollection.add({
-      id: 10,
-      name: 'Lobby'
+    this.roomCollection.once('reset', function () {
+      console.log('starting history');
+      Backbone.history.start();
     });
 
-    var lobby = this.roomCollection.at(0);
+    this.roomCollection.fetch({ reset: true });
 
-    lobby.get('users').add({
-      name: 'Jimmy'
+    App.socketListen('room.create', function (room) {
+      self.roomCollection.add(room);
     });
 
-    lobby.get('users').add({
-      name: 'Sammy'
+    App.socketListen('room.update', function (room) {
+      console.log('room.update');
+      self.roomCollection.get(room.id).set(room);
+    });
+
+    App.socketListen('room.delete', function (room) {
+      console.log('room.delete');
+      self.roomCollection.get(room.id).destroy();
     });
 
   },
@@ -51,6 +56,9 @@ _.extend(RoomController.prototype, {
 
   openRoom: function (roomId) {
     var room = this.roomCollection.get(roomId && roomId.trim() || '');
+
+    console.log(room);
+
     if (! room) return;
     room.trigger('select');
     App.vent.trigger('room:open', room);

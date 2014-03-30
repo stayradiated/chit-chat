@@ -19,6 +19,7 @@ var Room = Backbone.RelationalModel.extend({
     key: 'messages',
     relatedModel: MessageCollection.prototype.model,
     collectionType: MessageCollection,
+    includeInJSON: false,
     reverseRelation: {
       key: 'room',
       includeInJSON: 'id'
@@ -35,6 +36,7 @@ var Room = Backbone.RelationalModel.extend({
 
 var Rooms = Backbone.Collection.extend({
 
+  url: 'room',
   model: Room
 
 });

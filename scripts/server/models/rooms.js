@@ -15,7 +15,7 @@ var Rooms = Backbone.Collection.extend({
     });
 
     this.on('remove', function (room) {
-      Jandal.all.emit('room.destroy', { id: room.get('id') });
+      Jandal.all.emit('room.delete', { id: room.get('id') });
     });
 
   }

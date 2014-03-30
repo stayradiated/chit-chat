@@ -27,10 +27,9 @@ var CreateRoomView = Marionette.ItemView.extend({
   createRoom: function () {
     var name = this.ui.input.val().trim();
     if (! name) return;
-    this.collection.add({
-      id: Date.now(),
+    this.collection.create({
       name: name
-    });
+    }, { wait: true });
     this.remove();
   }
 

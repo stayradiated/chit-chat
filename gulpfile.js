@@ -19,7 +19,7 @@ gulp.task('watch', function () {
 
 gulp.task('connect', ['watch'], connect.server({
   root: ['dist'],
-  port: 8080,
+  port: 8000,
   livereload: true
 }));
 
@@ -47,7 +47,8 @@ gulp.task('libs', function () {
     'bower_components/backbone.marionette/lib/backbone.marionette.js',
     'bower_components/backbone-relational/backbone-relational.js',
     'bower_components/sockjs/sockjs.js',
-    'bower_components/moment/moment.js'
+    'bower_components/moment/moment.js',
+    'node_modules/jandal/client.js'
   ]).pipe(concat('libs.js'))
     .pipe(gulp.dest('dist/js'));
 });

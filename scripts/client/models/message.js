@@ -7,7 +7,8 @@ var Message = Backbone.RelationalModel.extend({
   relations: [{
     type: Backbone.HasOne,
     key: 'user',
-    relatedModel: UserCollection.prototype.model
+    relatedModel: UserCollection.prototype.model,
+    includeInJSON: 'id'
   }],
 
   defaults: {
@@ -26,6 +27,7 @@ var Message = Backbone.RelationalModel.extend({
 
 var Messages = Backbone.Collection.extend({
 
+  url: 'message',
   model: Message
 
 });

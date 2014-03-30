@@ -11,12 +11,17 @@ var Controller = function () {
 _.extend(Controller.prototype, {
 
   start: function () {
+    var self = this;
+    this.userCollection.fetch();
+
     this.showUsers(this.userCollection);
 
-    // this.userCollection.fetch();
+    App.socketListen('user.create', function (user) {
+      self.userCollection.add(user);
+    });
 
-    this.userCollection.add({
-      name: 'Jono'
+    App.socketListen('user.update', function (user) {
+      self.userCollection.get(user.id).set(user);
     });
 
   },

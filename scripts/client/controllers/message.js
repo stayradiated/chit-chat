@@ -12,12 +12,18 @@ var MessageController = function () {
 _.extend(MessageController.prototype, {
 
   start: function () {
-
-    // this.messageCollection.fetch();
+    var self = this;
 
     App.vent.on('room:open', function (room) {
-      this.showMessages(room.get('messages'));
-    }, this);
+      var messages = room.get('messages');
+      messages.fetch();
+      self.showMessages(messages);
+    });
+
+    App.socketListen('message.create', function (message) {
+      var room = App.user.get('room');
+      room.get('messages').add(message);
+    });
 
     this.showInput();
 

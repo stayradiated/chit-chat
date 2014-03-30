@@ -20,6 +20,7 @@ var RoomItemView = Marionette.ItemView.extend({
     this.trigger('select');
     this.$el.addClass('active');
     App.user.set('room', this.model);
+    App.user.save();
   },
 
   delete: function () {

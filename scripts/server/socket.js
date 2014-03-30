@@ -21,7 +21,7 @@ var Socket = function (socket) {
 
   this.user = new User();
   Socket.users.add(this.user);
-
+  this.socket.broadcast('user.create', this.user.toJSON());
   this.bind();
 };
 
@@ -34,17 +34,17 @@ _.extend(Socket.prototype, {
 
     'socket.close':    'removeUser',
 
-    'user.me':         'readThisUser',
+    'user.create':     'createUser',
     'user.read':       'readUsers',
     'user.update':     'updateUser',
 
     'room.create':     'createRoom',
     'room.read':       'readAllRooms',
     'room.update':     'updateRoom',
-    'room.destroy':    'destroyRoom',
+    'room.delete':     'deleteRoom',
 
     'message.create':  'createMessage',
-    'message.read':    'readAllMessagesInRoom'
+    'message.read':    'readMessages'
 
   },
 
@@ -59,7 +59,10 @@ _.extend(Socket.prototype, {
     this.user.on('change:room', this.updateUserRoom, this);
   },
 
+
+
   removeUser: function () {
+    this.socket.broadcast('user.delete', { id: this.user.id });
     this.user.destroy();
   },
 
@@ -68,16 +71,24 @@ _.extend(Socket.prototype, {
     if (cb) cb(this.user.toJSON());
   },
 
-  readThisUser: function (cb) {
+
+
+
+  createUser: function (obj, cb) {
+    if (typeof obj === 'function') {
+      cb = obj;
+      obj = {};
+    }
+    this.user.set(obj);
     cb(this.user.toJSON());
   },
 
   readUsers: function (obj, cb) {
     if (typeof obj === 'function') return obj(Socket.users.toJSON());
     var users = Socket.users.filter(function (user) {
-      if (obj.id && user.get('id') !== obj.id) return false;
+      if (obj.id && user.id !== obj.id) return false;
       if (obj.name && user.get('name') !== obj.name) return false;
-      if (obj.room && user.get('room').get('id') !== obj.room) return false;
+      if (obj.room && user.get('room').id !== obj.room) return false;
       return true;
     }).map(toJSON);
     if (cb) cb(users);
@@ -85,7 +96,7 @@ _.extend(Socket.prototype, {
 
   broadcastUserUpdate: function () {
     if (! this.user.has('room')) return;
-    var room = this.user.get('room').get('id');
+    var room = this.user.get('room').id;
     this.socket.broadcast.to(room).emit('user.update', this.user.toJSON());
   },
 
@@ -113,7 +124,7 @@ _.extend(Socket.prototype, {
     if (cb) cb(room.toJSON());
   },
 
-  destroyRoom: function (obj) {
+  deleteRoom: function (obj, cb) {
     var room = Socket.rooms.get(obj.id);
     if (! room) return;
 
@@ -121,13 +132,15 @@ _.extend(Socket.prototype, {
       user.set('room', null, { silent: true });
     });
 
-    this.socket.room(room.get('id')).empty();
+    this.socket.room(room.id).empty();
     Socket.rooms.remove(room);
+
+    if (cb) cb();
   },
 
   joinRoom: function (room) {
     if (! Socket.rooms.contains(room)) return;
-    this.socket.join(room.get('id'));
+    this.socket.join(room.id);
     this.updateSocketRooms();
   },
 
@@ -137,7 +150,7 @@ _.extend(Socket.prototype, {
   },
 
   updateSocketRooms: function () {
-    var currentRoom = this.user.get('room').get('id');
+    var currentRoom = this.user.get('room').id;
     _.map(this.socket.rooms, function (room) {
       if (room == 'all' || room === currentRoom) return;
       this.socket.leave(room);
@@ -145,8 +158,8 @@ _.extend(Socket.prototype, {
   },
 
 
-  readAllMessagesInRoom: function (obj, cb) {
-    var room = Socket.rooms.get(obj.room);
+  readMessages: function (cb) {
+    var room = this.user.get('room');
     if (! room) return;
     if (cb) cb(room.get('messages').toJSON());
   },

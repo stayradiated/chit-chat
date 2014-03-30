@@ -8,6 +8,8 @@
 
     "Backbone": true,
     "Marionette": true,
+    "SockJS": true,
+    "Jandal": true,
     "moment": true,
 
     "describe": true,
