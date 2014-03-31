@@ -29,6 +29,7 @@
     "backbone-relational": "^0.8.6",
     "express": "^3.5.0",
     "jandal": "0.0.14",
+    "log_": "0.0.2",
     "node-uuid": "^1.4.1",
     "sockjs": "^0.3.8",
     "underscore": "^1.6.0"

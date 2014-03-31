@@ -1,8 +1,8 @@
-'use strict';
-
-var UserCollection = require('../models/user');
+var UserCollection = require('./user');
 
 var Message = Backbone.RelationalModel.extend({
+
+  url: 'message',
 
   relations: [{
     type: Backbone.HasOne,
@@ -25,11 +25,4 @@ var Message = Backbone.RelationalModel.extend({
 
 });
 
-var Messages = Backbone.Collection.extend({
-
-  url: 'message',
-  model: Message
-
-});
-
-module.exports = Messages;
+module.exports = Message;

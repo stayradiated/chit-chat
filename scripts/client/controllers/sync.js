@@ -1,0 +1,50 @@
+
+var connection = new SockJS('http://192.168.1.100:8080/socket');
+var socket = new Jandal(connection, 'websocket');
+var log = require('log_/browser')('sync', 'green');
+
+Backbone.sync = function (method, model, options) {
+  var event = _.result(model, 'url') + '.' + method;
+
+  switch (method) {
+    case 'create':
+      log(event, model.toJSON());
+      socket.emit(event, model.toJSON(), options.success);
+      break;
+
+    case 'read':
+      log(event);
+      socket.emit(event, options.success);
+      break;
+
+    case 'update':
+      log(event, model.toJSON());
+      socket.emit(event, model.toJSON(), options.success);
+      break;
+
+    case 'delete':
+      log(event, model.id);
+      socket.emit(event, { id: model.id }, options.success);
+      break;
+
+    case 'patch':
+      var attrs = _.pick(model.toJSON(), _.keys(options.attrs));
+      log(event, attrs);
+      socket.emit(event, attrs, options.success);
+      break;
+
+    default:
+      log.warn('Ignored', event);
+      enabled = true;
+      break;
+  }
+
+};
+
+
+Backbone.Model.prototype.url = function () {
+  var base = _.result(this, 'urlRoot') || _.result(this.collection, 'url');
+  return base;
+};
+
+module.exports = socket;

@@ -12,15 +12,12 @@ var RoomItemView = Marionette.ItemView.extend({
   },
 
   initialize: function () {
+    this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.model.get('users'), 'add remove', this.render);
-    this.listenTo(this.model, 'select', this.select);
   },
 
-  select: function () {
-    this.trigger('select');
-    this.$el.addClass('active');
-    App.user.set('room', this.model);
-    App.user.save();
+  onRender: function () {
+    this.$el.toggleClass('active', this.model.get('selected'));
   },
 
   delete: function () {

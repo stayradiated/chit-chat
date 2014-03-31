@@ -1,15 +1,17 @@
-'use strict';
-
-var UserCollection = require('../models/user');
-var MessageCollection = require('../models/message');
+var User = require('./user');
+var Users = require('./users');
+var Message = require('./message');
+var Messages = require('./messages');
 
 var Room = Backbone.RelationalModel.extend({
+
+  user: 'room',
 
   relations: [{
     type: Backbone.HasMany,
     key: 'users',
-    relatedModel: UserCollection.prototype.model,
-    collectionType: UserCollection,
+    relatedModel: User,
+    collectionType: Users,
     reverseRelation: {
       key: 'room',
       includeInJSON: 'id'
@@ -17,8 +19,8 @@ var Room = Backbone.RelationalModel.extend({
   }, {
     type: Backbone.HasMany,
     key: 'messages',
-    relatedModel: MessageCollection.prototype.model,
-    collectionType: MessageCollection,
+    relatedModel: Message,
+    collectionType: Messages,
     includeInJSON: false,
     reverseRelation: {
       key: 'room',
@@ -29,17 +31,16 @@ var Room = Backbone.RelationalModel.extend({
   defaults: {
     name: '',
     messages: null,
-    users: null
+    users: null,
+    selected: false
+  },
+
+  blacklist: ['selected'],
+
+  toJSON: function (options) {
+    return _.omit(this.attributes, this.blacklist);
   }
 
 });
 
-var Rooms = Backbone.Collection.extend({
-
-  url: 'room',
-  model: Room
-
-});
-
-module.exports = Rooms;
-
+module.exports = Room;

@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var Jandal = require('jandal');
+var JandalLog = require('jandal-log');
 
 var Room  = require('./models/room');
 var Rooms = require('./models/rooms');
@@ -116,6 +117,7 @@ _.extend(Socket.prototype, {
     room = new Room(room, { silent: true });
     Socket.rooms.add(room);
     if (cb) cb(room);
+    this.socket.broadcast('room.create', room.toJSON());
   },
 
   updateRoom: function (obj, cb) {

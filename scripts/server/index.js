@@ -1,6 +1,7 @@
 'use strict';
 
 var Jandal = require('jandal');
+var JandalLog = require('jandal-log/client');
 var sockjs = require('sockjs');
 var express = require('express');
 var _ = require('underscore');
@@ -20,6 +21,7 @@ connection.installHandlers(server, { prefix: '/socket' });
 
 connection.on('connection', function (socket) {
   var jandal = new Jandal(socket, 'stream');
+  JandalLog.infect(jandal);
   new Socket(jandal);
 });
 

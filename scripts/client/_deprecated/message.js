@@ -3,7 +3,7 @@
 var App = require('../app');
 var MessageCollection = require('../models/message');
 var MessageCollectionView = require('../views/message');
-var MessageInputView = require('../views/messageInput');
+var MessageInputView = require('../views/input');
 
 var MessageController = function () {
 
@@ -39,10 +39,6 @@ _.extend(MessageController.prototype, {
   showInput: function () {
     var input = new MessageInputView();
     App.input.show(input);
-  },
-
-  openMessage: function (messageId) {
-    App.vent.trigger('message:open', (messageId && messageId.trim()) || '');
   }
 
 });

@@ -10,10 +10,6 @@ var Rooms = Backbone.Collection.extend({
   
   initialize: function () {
 
-    this.on('add', function (room) {
-      Jandal.all.emit('room.create', room.toJSON());
-    });
-
     this.on('remove', function (room) {
       Jandal.all.emit('room.delete', { id: room.get('id') });
     });

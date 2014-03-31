@@ -13,17 +13,7 @@ _.extend(Controller.prototype, {
   start: function () {
     var self = this;
     this.userCollection.fetch();
-
     this.showUsers(this.userCollection);
-
-    App.socketListen('user.create', function (user) {
-      self.userCollection.add(user);
-    });
-
-    App.socketListen('user.update', function (user) {
-      self.userCollection.get(user.id).set(user);
-    });
-
   },
 
   showUsers: function (userCollection) {
@@ -31,10 +21,6 @@ _.extend(Controller.prototype, {
       collection: userCollection
     });
     App.sidebarRight.show(users);
-  },
-
-  openUser: function (userId) {
-    App.vent.trigger('user:open', (userId && userId.trim()) || '');
   }
 
 });
