@@ -2,7 +2,7 @@
 
 var App = require('../app');
 var Sync = require('./sync');
-var log = require('log_/browser');
+var log = require('log_');
 
 var SocketController = function () {
 };

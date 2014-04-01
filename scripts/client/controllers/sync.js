@@ -1,7 +1,7 @@
 
 var connection = new SockJS('http://192.168.1.100:8080/socket');
 var socket = new Jandal(connection, 'websocket');
-var log = require('log_/browser')('sync', 'green');
+var log = require('log_')('sync', 'green');
 
 Backbone.sync = function (method, model, options) {
 
