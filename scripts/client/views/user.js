@@ -11,7 +11,7 @@ var UserItemView = Marionette.ItemView.extend({
 
 });
 
-var UserCollectionView = Marionette.CompositeView.extend({
+var UserCompositeView = Marionette.CompositeView.extend({
 
   className: 'users',
   template: '#template-user-container',
@@ -21,4 +21,4 @@ var UserCollectionView = Marionette.CompositeView.extend({
 
 });
 
-module.exports = UserCollectionView;
+module.exports = UserCompositeView;

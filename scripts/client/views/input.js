@@ -26,10 +26,7 @@ var MessageInputView = Marionette.ItemView.extend({
     if (! message.length) return;
 
     var room = App.user.get('room');
-    console.log('room', room);
     if (! room) return;
-
-    console.log('creating room');
 
     room.get('messages').create({
       contents: message

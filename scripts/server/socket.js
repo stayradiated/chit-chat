@@ -1,8 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var Jandal = require('jandal');
-var JandalLog = require('jandal-log');
 
 var Room  = require('./models/room');
 var Rooms = require('./models/rooms');
@@ -98,7 +96,7 @@ _.extend(Socket.prototype, {
   broadcastUserUpdate: function () {
     if (! this.user.has('room')) return;
     var room = this.user.get('room').id;
-    this.socket.broadcast.to(room).emit('user.update', this.user.toJSON());
+    this.socket.broadcast('user.update', this.user.toJSON());
   },
 
   updateUserRoom: function (user, room) {
@@ -123,7 +121,9 @@ _.extend(Socket.prototype, {
   updateRoom: function (obj, cb) {
     var room = Socket.rooms.get(obj.id);
     room.set('name', obj.name);
-    if (cb) cb(room.toJSON());
+    room = room.toJSON();
+    if (cb) cb(room);
+    this.socket.broadcast('room.update', room);
   },
 
   deleteRoom: function (obj, cb) {
@@ -138,6 +138,7 @@ _.extend(Socket.prototype, {
     Socket.rooms.remove(room);
 
     if (cb) cb();
+    this.socket.broadcast('room.delete', {id: room.id});
   },
 
   joinRoom: function (room) {
@@ -167,11 +168,12 @@ _.extend(Socket.prototype, {
   },
 
   createMessage: function (message, cb) {
-    message.user = this.user;
     message.room = this.user.get('room');
     if (! message.room) return;
-    message = new Message(message);
-    if (cb) cb(message.toJSON());
+    message.user = this.user.get('name');
+    message = new Message(message).toJSON();
+    if (cb) cb(message);
+    this.socket.broadcast.to(message.room).emit('message.create', message);
   }
 
 });

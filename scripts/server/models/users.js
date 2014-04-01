@@ -1,6 +1,5 @@
 'use strict';
 
-var Jandal = require('jandal');
 var Backbone = require('backbone');
 var User = require('./user');
 

@@ -4,20 +4,10 @@ var _ = require('underscore');
 var uuid = require('node-uuid');
 var BackboneRelational = require('backbone-relational');
 
-var User = require('./user');
-var Users = require('./user');
-
 var Message = BackboneRelational.RelationalModel.extend({
 
-  relations: [{
-    type: BackboneRelational.HasOne,
-    key: 'user',
-    relatedModel: User,
-    includeInJSON: 'id'
-  }],
-
   defaults: {
-    user: null,
+    user: '',
     room: null,
     time: null,
     contents: ''

@@ -9,7 +9,8 @@
 
   .messages {
     flex: 1;
-    overflow: auto;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

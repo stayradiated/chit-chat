@@ -24,9 +24,12 @@ var HeaderView = Marionette.ItemView.extend({
   },
 
   changeName: function () {
-    console.log('changing name');
-    var name = this.ui.input.val();
-    this.model.save('name', name);
+    var name = this.ui.input.val().trim();
+    if (! name) {
+      this.ui.input.val(this.model.get('name'));
+    } else {
+      this.model.save({name: name}, {patch: true});
+    }
   }
 
 });

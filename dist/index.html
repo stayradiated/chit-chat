@@ -52,9 +52,9 @@
   </script>
 
   <script type="template" id="template-message">
-    <span class="user"><%- user.name %></span>
+    <span class="user"><%- user %></span>
     <span class="contents"><%- contents %></span>
-    <span class="time"><%- time %></span>
+    <span class="time"><%- moment(time).format('h:mma, D MMM') %></span>
   </script>
 
   <script type="template" id="template-room">

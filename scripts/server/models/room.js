@@ -40,7 +40,7 @@ var Room = BackboneRelational.RelationalModel.extend({
   initialize: function () {
     this.set('id', uuid.v4());
 
-    this.on('add:users remove:users change:name', function () {
+    this.on('add:users remove:users', function () {
       Jandal.all.emit('room.update', this.toJSON());
     });
 

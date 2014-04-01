@@ -11,7 +11,6 @@ var DestroyRoomView = Marionette.ItemView.extend({
   },
 
   destroyRoom: function () {
-    console.log('destroying room');
     this.model.destroy();
     this.remove();
   }

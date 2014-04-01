@@ -4,6 +4,16 @@ var socket = new Jandal(connection, 'websocket');
 var log = require('log_/browser')('sync', 'green');
 
 Backbone.sync = function (method, model, options) {
+
+  var attrs;
+
+  if (method === 'patch') {
+    method = 'update';
+    attrs = _.pick(model.toJSON(), _.keys(options.attrs));
+  } else {
+    attrs = model.toJSON();
+  }
+
   var event = _.result(model, 'url') + '.' + method;
 
   switch (method) {
@@ -25,12 +35,6 @@ Backbone.sync = function (method, model, options) {
     case 'delete':
       log(event, model.id);
       socket.emit(event, { id: model.id }, options.success);
-      break;
-
-    case 'patch':
-      var attrs = _.pick(model.toJSON(), _.keys(options.attrs));
-      log(event, attrs);
-      socket.emit(event, attrs, options.success);
       break;
 
     default:

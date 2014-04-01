@@ -19,7 +19,7 @@ $(function () {
   require('./controllers/socket');
 
   App.user = new User({
-    name: 'George'
+    name: 'Guest' + Math.floor(Math.random() * 100)
   });
 
   // load views

@@ -36,7 +36,6 @@ _.extend(ViewController.prototype, {
 
     this.showHeader(App.user);
     this.showRooms(App.rooms);
-    this.showUsers(App.users);
     this.showInput();
   },
 
@@ -44,6 +43,7 @@ _.extend(ViewController.prototype, {
     var messages = room.get('messages');
     messages.fetch();
     this.showMessages(messages);
+    this.showUsers(room.get('users'));
   },
 
   openRoomFromRouter: function (roomId) {
@@ -74,8 +74,8 @@ _.extend(ViewController.prototype, {
     App.sidebarLeft.show(roomsView);
   },
 
-  showUsers: function (user) {
-    var usersView = new UsersView({ collection: user });
+  showUsers: function (users) {
+    var usersView = new UsersView({ collection: users });
     App.sidebarRight.show(usersView);
   },
 

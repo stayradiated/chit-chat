@@ -5,11 +5,7 @@ var App = require('../app');
 var MessageItemView = Marionette.ItemView.extend({
 
   className: 'message',
-  template: '#template-message',
-
-  initialize: function () {
-    this.listenTo(this.model.get('user'), 'change', this.render);
-  }
+  template: '#template-message'
 
 });
 
