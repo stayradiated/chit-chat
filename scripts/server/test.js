@@ -134,9 +134,11 @@ describe('Socket', function () {
 
     });
 
-    it('should emit events when a room is created', function (done) {
+    it('should broadcast events when a room is created', function (done) {
 
-      client.once('room.create', function (room) {
+      var otherClient = createClient();
+
+      otherClient.once('room.create', function (room) {
         expect(room.name).to.equal(room.name);
         expect(room.users).to.eql([]);
         done();
@@ -178,9 +180,11 @@ describe('Socket', function () {
 
     });
 
-    it('should update a room name', function (done) {
+    it('should broadcast room.update', function (done) {
 
-      client.once('room.update', function (room) {
+      var otherClient = createClient();
+
+      otherClient.once('room.update', function (room) {
         expect(room.name).to.equal('my room name');
         done();
       });
