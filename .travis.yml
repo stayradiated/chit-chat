@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- '0.10'
+branches:
+  only:
+  - master
+before_script:
+- gulp
+deploy:
+  provider: heroku
+  api_key:
+    secure: HEm4YH8LKAxx5Vb6Fq9sSheC3BbhcFF4LiPSN9ukJls3bonpxENXhSqhtVzK12/uPnBkPGEanV5Pg7OJGpFiDpNBvh+IB2L7eFn5yLDgMLWWQK8QtaEdQf5DVQnHgjABipTxbBWevvv2jM5/J1aFYFiTBegI1v3DqPyRYbjbqcw=
+  app: chit-chat-app
+  on:
+    repo: stayradiated/chit-chat
