@@ -17,11 +17,13 @@ gulp.task('watch', function () {
   gulp.watch('scripts/client/**/*.js', ['scripts']);
 });
 
-gulp.task('connect', ['watch'], connect.server({
-  root: ['dist'],
-  port: 8000,
-  livereload: true
-}));
+gulp.task('connect', ['watch'], function () {
+  connect.server({
+    root: ['dist'],
+    port: 8000,
+    livereload: true
+  });
+});
 
 gulp.task('sass', function () {
   return gulp.src('stylesheets/main.scss')
