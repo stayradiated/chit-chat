@@ -1,5 +1,5 @@
 
-var connection = new SockJS('http://192.168.1.100:8080/socket');
+var connection = new SockJS('/socket');
 var socket = new Jandal(connection, 'websocket');
 var log = require('log_')('sync', 'green');
 

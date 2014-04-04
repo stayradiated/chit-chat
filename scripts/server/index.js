@@ -14,7 +14,7 @@ app.configure(function () {
   app.use(express.static(__dirname + '/../../dist'));
 });
 
-var server = app.listen(8080);
+var server = app.listen(process.env.PORT || 8080);
 
 var connection = sockjs.createServer();
 connection.installHandlers(server, { prefix: '/socket' });
