@@ -94,8 +94,6 @@ _.extend(Socket.prototype, {
   },
 
   broadcastUserUpdate: function () {
-    if (! this.user.has('room')) return;
-    var room = this.user.get('room').id;
     this.socket.broadcast('user.update', this.user.toJSON());
   },
 
