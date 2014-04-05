@@ -4,8 +4,6 @@ node_js:
 branches:
   only:
   - master
-before_script:
-- npm run build
 deploy:
   provider: heroku
   api_key:
@@ -13,4 +11,3 @@ deploy:
   app: chit-chat-app
   on:
     repo: stayradiated/chit-chat
-  run: "npm run build"

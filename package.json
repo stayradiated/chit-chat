@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node scripts/server/index.js",
     "build": "gulp",
-    "test": "mocha -R spec scripts/server/test.js"
+    "test": "mocha -R spec scripts/server/test.js",
+    "postinstall": "gulp"
   },
   "repository": {
     "type": "git",
