@@ -35,19 +35,20 @@
     "log_": "^0.0.3",
     "node-uuid": "^1.4.1",
     "sockjs": "^0.3.8",
-    "underscore": "^1.6.0"
-  },
-  "devDependencies": {
-    "chai": "^1.9.1",
+    "underscore": "^1.6.0",
+
     "gulp": "^3.6.0",
     "gulp-autoprefixer": "0.0.6",
     "gulp-browserify": "^0.5.0",
     "gulp-concat": "^2.2.0",
     "gulp-connect": "^2.0.1",
     "gulp-sass": "^0.7.1",
-    "gulp-uglify": "^0.2.1",
-    "random-words": "0.0.1",
     "run-sequence": "^0.3.6",
+    "gulp-uglify": "^0.2.1"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "random-words": "0.0.1",
     "mocha": "^1.18.2"
   }
 }
