@@ -12,6 +12,7 @@ var Room = Backbone.RelationalModel.extend({
     key: 'users',
     relatedModel: User,
     collectionType: Users,
+    includeInJSON: 'id',
     reverseRelation: {
       key: 'room',
       includeInJSON: 'id'
