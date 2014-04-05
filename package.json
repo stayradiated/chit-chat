@@ -5,6 +5,7 @@
   "main": "scripts/server/index.js",
   "scripts": {
     "start": "node scripts/server/index.js",
+    "build": "gulp",
     "test": "mocha -R spec scripts/server/test.js"
   },
   "repository": {
