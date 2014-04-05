@@ -1,7 +1,7 @@
 
 var connection = new SockJS('/socket');
 var socket = new Jandal(connection, 'websocket');
-var log = require('log_')('sync', 'green');
+var createLog = require('log_');
 
 Backbone.sync = function (method, model, options) {
 
@@ -15,30 +15,31 @@ Backbone.sync = function (method, model, options) {
   }
 
   var event = _.result(model, 'url') + '.' + method;
+  var log = createLog(event, 'green');
 
   switch (method) {
     case 'create':
-      log(event, model.toJSON());
+      log(model.toJSON());
       socket.emit(event, model.toJSON(), options.success);
       break;
 
     case 'read':
-      log(event);
+      log();
       socket.emit(event, options.success);
       break;
 
     case 'update':
-      log(event, model.toJSON());
+      log(model.toJSON());
       socket.emit(event, model.toJSON(), options.success);
       break;
 
     case 'delete':
-      log(event, model.id);
+      log(model.id);
       socket.emit(event, { id: model.id }, options.success);
       break;
 
     default:
-      log.warn('Ignored', event);
+      log.warn('Ignored');
       enabled = true;
       break;
   }

@@ -24,7 +24,7 @@ _.extend(SocketController.prototype, {
     _.each(this.events, function (method, event) {
       var logEvent = log(event, 'blue');
       Sync.on(event, function () {
-        logEvent.apply(null, arguments);
+        logEvent(arguments[0]);
         self[method].apply(self, arguments);
       });
     });
