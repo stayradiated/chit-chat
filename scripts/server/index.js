@@ -10,10 +10,6 @@ var Socket = require('./socket');
 
 var app = express();
 
-var fs = require('fs');
-console.log(fs.readdirSync(__dirname + '/../../dist/css'));
-console.log(fs.readdirSync(__dirname + '/../../dist/js'));
-
 app.configure(function () {
   app.use(express.static(__dirname + '/../../dist'));
 });
