@@ -27,10 +27,8 @@
     "jquery": "~2.1.0",
     "underscore": "~1.6.0",
     "backbone.marionette": "~1.7.1",
+    "backbone-relational": "0.8.7",
     "sockjs": "~0.3.4",
     "moment": "~2.5.1"
-  },
-  "devDependencies": {
-    "backbone-relational": "~0.8.7"
   }
 }
